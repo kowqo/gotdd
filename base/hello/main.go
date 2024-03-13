@@ -4,28 +4,28 @@ import "fmt"
 
 func main() {
 
-	a := "s"
-	fmt.Println(a)
+	fmt.Println(Hello("", "EN"))
 }
 
 const prefixEn = "Hello "
 const prefixRu = "Privet "
+const prefixFr = "Bonjour "
 
 func Hello(name, lang string) string {
 	var pref string
 
 	if name == "" {
-		if lang == "RU" {
-			name = "Mir"
-		} else {
-			name = "World!"
-		}
+		name = "World!"
 	}
 
-	if lang == "RU" {
+	switch lang {
+	case "RU":
 		pref = prefixRu
-	} else {
+	case "EN":
 		pref = prefixEn
+	case "FR":
+		pref = prefixFr
+
 	}
 
 	return pref + name

@@ -3,14 +3,14 @@ package main
 import "testing"
 
 func TestHello(t *testing.T) {
-	t.Run("if have name Chris, default language", func(t *testing.T) {
-		got := Hello("Chris", "")
+	t.Run("if have name Chris, EN language", func(t *testing.T) {
+		got := Hello("Chris", "EN")
 		want := "Hello " + "Chris"
 		assertCorrectMessage(t, got, want)
 	})
 
-	t.Run("with no args, default language", func(t *testing.T) {
-		got := Hello("", "")
+	t.Run("with no args, EN language", func(t *testing.T) {
+		got := Hello("", "EN")
 		want := "Hello " + "World!"
 		assertCorrectMessage(t, got, want)
 	})
@@ -23,9 +23,23 @@ func TestHello(t *testing.T) {
 
 	})
 
-	t.Run("args with Russian lang", func(t *testing.T) {
+	t.Run("no args with Russian lang", func(t *testing.T) {
 		got := Hello("", "RU")
-		want := "Privet " + "Mir"
+		want := "Privet " + "World!"
+		assertCorrectMessage(t, got, want)
+
+	})
+
+	t.Run("args with French lang", func(t *testing.T) {
+		got := Hello("Serega", "FR")
+		want := "Bonjour " + "Serega"
+		assertCorrectMessage(t, got, want)
+
+	})
+
+	t.Run("no args with French lang", func(t *testing.T) {
+		got := Hello("", "FR")
+		want := "Bonjour " + "World!"
 		assertCorrectMessage(t, got, want)
 
 	})
