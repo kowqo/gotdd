@@ -11,9 +11,10 @@ func main() {
 type Dictionary map[string]string
 
 const (
-	UnknownWordError    = DictionaryErr("UnknownWord")
-	AlreadyHaveKeyValue = DictionaryErr("AlreadyHaveKeyValue")
-	DontHaveKey         = DictionaryErr("DontHaveKey")
+	UnknownWordError      = DictionaryErr("UnknownWord")
+	AlreadyHaveKeyValue   = DictionaryErr("AlreadyHaveKeyValue")
+	DontHaveKey           = DictionaryErr("DontHaveKey")
+	CantDeleteNonExistKey = DictionaryErr("CantDeleteNonExistKey")
 )
 
 type DictionaryErr string
@@ -29,7 +30,7 @@ func (d Dictionary) Search(key string) (string, error) {
 		return "", UnknownWordError
 	}
 
-	return d[key], nil
+	return value, nil
 }
 
 func (d Dictionary) Add(key, value string) error {
@@ -58,5 +59,18 @@ func (d Dictionary) Update(key, value string) error {
 	default:
 		return err
 	}
+
+	return nil
+}
+
+func (d Dictionary) Delete(key string) error {
+	_, err := d.Search(key)
+
+	if err != nil {
+		return CantDeleteNonExistKey
+	}
+		
+	delete(d, key)
+
 	return nil
 }

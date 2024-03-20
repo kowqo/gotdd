@@ -111,7 +111,22 @@ func TestSearch(t *testing.T) {
 		assertError(t, err, UnknownWordError)
 
 		assertValue(t, "", got)
-
 	})
 
+	t.Run("Удаляем слово которое есть в словаер", func(t *testing.T) {
+		const key = "test1"
+		dict := Dictionary{key: "slovo"}
+
+		err := dict.Delete(key)
+
+		assertNoError(t, err)
+	})
+
+	t.Run("Пытаемся удалить слово которого нет в словаре", func(t *testing.T) {
+		dict := Dictionary{"Hello": "slovo"}
+
+		err := dict.Delete("key")
+
+		assertError(t, err, CantDeleteNonExistKey)
+	})
 }
