@@ -69,7 +69,7 @@ func (d Dictionary) Delete(key string) error {
 	if err != nil {
 		return CantDeleteNonExistKey
 	}
-		
+
 	delete(d, key)
 
 	return nil
